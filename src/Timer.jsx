@@ -5,21 +5,30 @@ function Timer() {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
 
+  const toggleTimer = () => {
+    if (isRunning) {
+      stopTimer();
+    } else {
+      startTimer();
+    }
+  };
+
   const startTimer = () => {
-    if (!isRunning) {
-      const confirmation = window.confirm('Do you want to start your timer?');
-      if (confirmation) {
-        setStartTime(new Date());
-        setIsRunning(true);
-      }
+    const confirmation = window.confirm('Do you want to start your timer?');
+    if (confirmation) {
+      setStartTime(new Date());
+      setIsRunning(true);
     }
   };
 
   const stopTimer = () => {
-    if (isRunning) {
+    if (startTime) {
       const confirmation = window.confirm('Do you want to stop your timer?');
       if (confirmation) {
         setIsRunning(false);
+        const currentTime = new Date();
+        const differenceInSeconds = Math.floor((currentTime - startTime) / 1000);
+        setElapsedTime(differenceInSeconds);
         showCongratulations();
       }
     }
@@ -65,14 +74,14 @@ function Timer() {
     <div className="timer-container">
       <button
         className={`timer-button ${isRunning ? 'running' : ''}`}
-        onClick={isRunning ? stopTimer : startTimer}
+        onClick={toggleTimer}
       >
         {isRunning ? (
           <span>
             Working Time: <span className="timer-display">{formatTime(elapsedTime)}</span>
           </span>
         ) : (
-        'Working Time'
+          'Working Time'
         )}
       </button>
     </div>
