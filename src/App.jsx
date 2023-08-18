@@ -1,20 +1,12 @@
 import React from 'react';
-import './App.css';
+import TimerPage from './pages/TimerPage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Training</h1>
-      </header>
-      <main>
-     
-      </main>
-      <footer>
-        <p>© 2023 Training</p>
-      </footer>
-    </div>
-  );
+  return <>
+    <h1>Timer App</h1>
+    <TimerPage></TimerPage>
+  </>
+
 }
 
 export default App;
